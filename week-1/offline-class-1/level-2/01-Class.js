@@ -4,9 +4,13 @@ class Animal {
     this.name = name
     this.legCount = legCount
   }
-  describe() {
+  static type(){
+    console.log("I am an animal at last")
+  }
+   describe() {
     return `${this.name} has ${this.legCount} legs`
   }
 }
 
-
+dog=new Animal('dog',4)
+console.log(typeof(Animal.type()))
