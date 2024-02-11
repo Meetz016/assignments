@@ -17,5 +17,30 @@ const fs = require('fs');
 const path = require('path');
 const app = express();
 
-
+app.get("/files",function(req,res){
+  const location=`C:/Users/kmeet/OneDrive/Desktop/0x100/assignments/week-2/02-nodejs/files`
+  fs.readdir(location,function(err,file){
+    if(err){
+       return res.status(500).json({ error: 'Failed to retrieve files' });
+    }
+    res.json({file})
+  })
+})
+//2nd task done 
+app.get("/file/:filename",function(req,res){
+  const filePath=req.params.filename
+  const location=`C:/Users/kmeet/OneDrive/Desktop/0x100/assignments/week-2/02-nodejs/files/${filePath}`
+    fs.readFile(location,"utf-8",function(err,data){
+      if(err){
+        return res.status(404).send('File not found');
+        
+      }
+      res.send({
+        data
+      })
+    })
+})
+app.all('*', (req, res) => {
+  res.status(404).send('Route not found');
+});
 module.exports = app;
